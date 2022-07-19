@@ -81,7 +81,8 @@ export default class SmtpConnector implements EmailConnectorInstance<SmtpConfig>
         pass: password,
       },
       // Set `secure` to be false and `requireTLS` to be true to make sure `nodemailer` calls STARTTLS, which is wildly adopted in email servers.
-      secure: false,
+      // PATCH(Tsingroc): 腾讯企业邮箱强制secure=true
+      secure: true,
       requireTLS: true,
       // Enable `logger` to help debugging.
       logger: true,
