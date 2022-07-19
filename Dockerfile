@@ -4,8 +4,11 @@ WORKDIR /etc/logto
 ENV CI=true
 COPY . .
 
+# PATCH(tsingroc): 换国内源
+RUN npm config --global set registry https://registry.npmmirror.com/ \
+    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # Install toolchain
-RUN npm add --location=global pnpm@^7.2.1
+RUN npm install --global pnpm@^7.2.1
 # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#node-gyp-alpine
 RUN apk add --no-cache python3 make g++
 
