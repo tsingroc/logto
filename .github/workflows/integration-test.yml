@@ -44,21 +44,22 @@ jobs:
         with:
           path: tmp/
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
+      - name: Setup Node and pnpm
+        uses: silverhand-io/actions-node-pnpm-run-steps@v1.2.2
 
       # Setup integration test package
+      - name: Install dependencies
+        run: |
+          cd tmp/packages/schemas
+          pnpm i && pnpm build
+          cd tmp/packages/integration-tests
+          npm i
+
       - name: Extract integration test package
         run: |
           mv tmp/packages/integration-tests /tmp
           rm -rf tmp
       
-      - name: Install dependencies
-        run: |
-          cd /tmp/integration-tests
-          npm i
-
       # Setup environment
       - name: Start Postgres (Linux)
         if: runner.os == 'Linux'
