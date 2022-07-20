@@ -1,4 +1,5 @@
-import { arbitraryObjectGuard } from '@logto/schemas';
+// Feat(tsingroc): 禁用修改custom-data接口以保证通过custom-data进行API鉴权的安全性
+// import { arbitraryObjectGuard } from '@logto/schemas';
 import { passwordRegEx } from '@logto/shared';
 import { object, string } from 'zod';
 
@@ -17,25 +18,26 @@ export default function meRoutes<T extends AuthedRouter>(router: T) {
     return next();
   });
 
-  router.patch(
-    '/me/custom-data',
-    koaGuard({ body: object({ customData: arbitraryObjectGuard }) }),
-    async (ctx, next) => {
-      const {
-        body: { customData },
-      } = ctx.guard;
+  // Feat(tsingroc): 禁用修改custom-data接口以保证通过custom-data进行API鉴权的安全性
+  //   router.patch(
+  //     '/me/custom-data',
+  //     koaGuard({ body: object({ customData: arbitraryObjectGuard }) }),
+  //     async (ctx, next) => {
+  //       const {
+  //         body: { customData },
+  //       } = ctx.guard;
 
-      await findUserById(ctx.auth);
+  //       await findUserById(ctx.auth);
 
-      const user = await updateUserById(ctx.auth, {
-        customData,
-      });
+  //       const user = await updateUserById(ctx.auth, {
+  //         customData,
+  //       });
 
-      ctx.body = user.customData;
+  //       ctx.body = user.customData;
 
-      return next();
-    }
-  );
+  //       return next();
+  //     }
+  //   );
 
   router.patch(
     '/me/password',
