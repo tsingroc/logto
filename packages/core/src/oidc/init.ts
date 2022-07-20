@@ -147,12 +147,18 @@ export default async function initOidc(app: Koa): Promise<Provider> {
       // AccessToken type is not exported by default, need to asset token is AccessToken
       if (token.kind === 'AccessToken') {
         const { accountId } = token;
-        const { roleNames } = await findUserById(accountId);
+        const { roleNames, customData } = await findUserById(accountId);
+        // Feature(tsingroc): 通过allowed_resources字段控制user对API的访问权限
+        const allowedResources: unknown[] =
+          'allowed_resources' in customData && Array.isArray(customData.allowed_resources)
+            ? customData.allowed_resources
+            : [];
 
         // Add User Roles to the AccessToken claims. Should be removed once we have RBAC implemented.
         // User Roles should be hidden and  determined by the AccessToken scope only.
         return snakecaseKeys({
           roleNames,
+          allowedResources,
         });
       }
     },
