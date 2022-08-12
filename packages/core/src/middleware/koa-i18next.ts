@@ -4,10 +4,10 @@ import { IRouterParamContext } from 'koa-router';
 
 import detectLanguage from '@/i18n/detect-language';
 
-interface LanguageUtils {
+type LanguageUtils = {
   formatLanguageCode(code: string): string;
   isSupportedCode(code: string): boolean;
-}
+};
 
 export type WithI18nContext<ContextT extends IRouterParamContext = IRouterParamContext> =
   ContextT & {
@@ -22,6 +22,7 @@ export default function koaI18next<
   return async (ctx, next) => {
     const languages = detectLanguage(ctx);
     // Cannot patch type def directly, see https://github.com/microsoft/TypeScript/issues/36146
+    // eslint-disable-next-line no-restricted-syntax
     const languageUtils = i18next.services.languageUtils as LanguageUtils;
     const foundLanguage = languages
       .map((code) => languageUtils.formatLanguageCode(code))

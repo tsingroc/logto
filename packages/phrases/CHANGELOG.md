@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.4](https://github.com/logto-io/logto/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-08-11)
+
+
+### Features
+
+* **console:** show app secret ([#1723](https://github.com/logto-io/logto/issues/1723)) ([01dfeed](https://github.com/logto-io/logto/commit/01dfeed19b05219c1ab52790b3e98a029af02f90))
+
+
+
+## [1.0.0-beta.3](https://github.com/logto-io/logto/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-08-01)
+
+
+### Features
+
+* **console:** add Next.js integration guide in admin console ([7d3f947](https://github.com/logto-io/logto/commit/7d3f94738f495de98464d23b6fdf18214d59005e))
+* **phrases:** tr language ([#1707](https://github.com/logto-io/logto/issues/1707)) ([411a8c2](https://github.com/logto-io/logto/commit/411a8c2fa2bfb16c4fef5f0a55c3c1dc5ead1124))
+
+
+
+## [1.0.0-beta.2](https://github.com/logto-io/logto/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-07-25)
+
+
+### Bug Fixes
+
+* **console:** should parse to json before using zod safeParse ([ec674ec](https://github.com/logto-io/logto/commit/ec674ecd7745beb3df2b651bfa98d5e8d4a62dfd))
+
+
+
 ## [1.0.0-beta.1](https://github.com/logto-io/logto/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-07-19)
 
 

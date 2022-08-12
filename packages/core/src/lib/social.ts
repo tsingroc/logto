@@ -14,10 +14,10 @@ import {
 } from '@/queries/user';
 import assertThat from '@/utils/assert-that';
 
-export interface SocialUserInfoSession {
+export type SocialUserInfoSession = {
   connectorId: string;
   userInfo: SocialUserInfo;
-}
+};
 
 const getConnector = async (connectorId: string) => {
   try {

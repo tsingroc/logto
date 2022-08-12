@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.4](https://github.com/logto-io/logto/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-08-11)
+
+
+### Bug Fixes
+
+* build and types ([8b51543](https://github.com/logto-io/logto/commit/8b515435cdb0644d0ca19e2c26ba3e744355bb0b))
+* **ui,console,demo-app:** update react render method ([#1750](https://github.com/logto-io/logto/issues/1750)) ([4b972f2](https://github.com/logto-io/logto/commit/4b972f2e23e2d4609d9955c4d1d42972f368f5b9))
+* **ui:** add sandbox props to iframe ([#1757](https://github.com/logto-io/logto/issues/1757)) ([62d2afe](https://github.com/logto-io/logto/commit/62d2afe9579334547b7ff5b803299b89933a5bd8))
+* **ui:** connector name  should fallback to en ([#1718](https://github.com/logto-io/logto/issues/1718)) ([3af5b1b](https://github.com/logto-io/logto/commit/3af5b1b4250d6de6883b4c8a8b9f7cf4f9b12dab))
+* **ui:** extract ReactModal elementApp and fix act warning in ut ([#1756](https://github.com/logto-io/logto/issues/1756)) ([0270bf1](https://github.com/logto-io/logto/commit/0270bf1be3a51d9b9f8ed84a0327c58ed8a1bd4d))
+* **ui:** fix ui test ([e4629f2](https://github.com/logto-io/logto/commit/e4629f2a5fd26a1d8eaefd04042eaeb5563ec30c))
+
+
+
+## [1.0.0-beta.3](https://github.com/logto-io/logto/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-08-01)
+
+
+### Features
+
+* **phrases:** tr language ([#1707](https://github.com/logto-io/logto/issues/1707)) ([411a8c2](https://github.com/logto-io/logto/commit/411a8c2fa2bfb16c4fef5f0a55c3c1dc5ead1124))
+
+
+
+## [1.0.0-beta.2](https://github.com/logto-io/logto/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-07-25)
+
+
+### Bug Fixes
+
+* **ui:** fix some firefox standout bug ([#1615](https://github.com/logto-io/logto/issues/1615)) ([4ce6bd8](https://github.com/logto-io/logto/commit/4ce6bd8cf5c5953d9f62878ab2ea6ede74f6ca48))
+* **ui:** protect window.location xss ([#1639](https://github.com/logto-io/logto/issues/1639)) ([34b465c](https://github.com/logto-io/logto/commit/34b465c7d83999e2215ef83555b64e38778b8b49))
+* **ui:** should clear prev passcode input when click on backspace ([#1660](https://github.com/logto-io/logto/issues/1660)) ([7dfbc30](https://github.com/logto-io/logto/commit/7dfbc300b09cc3dac2a06176bf2cbc9f338d857e))
+
+
+
 ## [1.0.0-beta.1](https://github.com/logto-io/logto/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-07-19)
 
 

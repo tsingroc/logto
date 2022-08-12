@@ -1,3 +1,5 @@
+// FIXME: @Darcy
+/* eslint-disable unicorn/text-encoding-identifier-case */
 import { ConnectorType, ConnectorMetadata, ConnectorPlatform } from '@logto/connector-types';
 
 export const authorizationEndpoint = 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm';
@@ -26,12 +28,16 @@ export const defaultMetadata: ConnectorMetadata = {
   name: {
     en: 'Alipay',
     'zh-CN': '支付宝',
+    'tr-TR': 'Alipay',
+    'ko-KR': 'Alipay',
   },
   logo: './logo.svg',
   logoDark: null,
   description: {
     en: 'Alipay is a third-party mobile and online payment platform.',
     'zh-CN': '支付宝是一个第三方支付平台。',
+    'tr-TR': 'Alipay, üçüncü şahıslara ait bir mobil ve çevrimiçi ödeme platformudur.',
+    'ko-KR': 'Alipay는 서드파티 모바일 및 온라인 결제 플랫폼 입니다.',
   },
   readme: './README.md',
   configTemplate: './docs/config-template.json',
@@ -40,3 +46,4 @@ export const defaultMetadata: ConnectorMetadata = {
 export const defaultTimeout = 5000;
 
 export const timestampFormat = 'YYYY-MM-DD HH:mm:ss';
+/* eslint-enable unicorn/text-encoding-identifier-case */

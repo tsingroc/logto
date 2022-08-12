@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.4](https://github.com/logto-io/logto/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** use comma separated values as a string array in the env file (#1762)
+
+### Features
+
+* **console:** add app secret to guide ([#1735](https://github.com/logto-io/logto/issues/1735)) ([380e258](https://github.com/logto-io/logto/commit/380e2581fa5fdd2a8d4c76f45cd114b1ddea9891))
+* **console:** show app secret ([#1723](https://github.com/logto-io/logto/issues/1723)) ([01dfeed](https://github.com/logto-io/logto/commit/01dfeed19b05219c1ab52790b3e98a029af02f90))
+* **core,schemas:** add application secret ([#1715](https://github.com/logto-io/logto/issues/1715)) ([543ee04](https://github.com/logto-io/logto/commit/543ee04f53f81b41b0669f0ac5773fc67d500c0c))
+* **core:** support signing key rotation ([#1732](https://github.com/logto-io/logto/issues/1732)) ([00bab4c](https://github.com/logto-io/logto/commit/00bab4c09582797c31d9bc5c7fe6d3c4b44a2f36))
+* **core:** use comma separated values as a string array in the env file ([#1762](https://github.com/logto-io/logto/issues/1762)) ([f6db981](https://github.com/logto-io/logto/commit/f6db981600fd16a860262336ad88d886ca502628))
+* **schemas:** guard string max length ([#1737](https://github.com/logto-io/logto/issues/1737)) ([cdf210d](https://github.com/logto-io/logto/commit/cdf210df100c4105eb095f693b7cb31a005d62b8))
+
+
+### Bug Fixes
+
+* build and types ([8b51543](https://github.com/logto-io/logto/commit/8b515435cdb0644d0ca19e2c26ba3e744355bb0b))
+* **deps:** update dependency slonik to v29 ([#1700](https://github.com/logto-io/logto/issues/1700)) ([21a0c8f](https://github.com/logto-io/logto/commit/21a0c8f635cd561417dd23bca1d899771da6321a))
+* **shared:** fix dark color generator ([#1719](https://github.com/logto-io/logto/issues/1719)) ([3deb98c](https://github.com/logto-io/logto/commit/3deb98c18dfe54abda53e6de7592f40924e1f2f3))
+* **ui,console,demo-app:** update react render method ([#1750](https://github.com/logto-io/logto/issues/1750)) ([4b972f2](https://github.com/logto-io/logto/commit/4b972f2e23e2d4609d9955c4d1d42972f368f5b9))
+* **ui:** add sandbox props to iframe ([#1757](https://github.com/logto-io/logto/issues/1757)) ([62d2afe](https://github.com/logto-io/logto/commit/62d2afe9579334547b7ff5b803299b89933a5bd8))
+* **ui:** connector name  should fallback to en ([#1718](https://github.com/logto-io/logto/issues/1718)) ([3af5b1b](https://github.com/logto-io/logto/commit/3af5b1b4250d6de6883b4c8a8b9f7cf4f9b12dab))
+* **ui:** extract ReactModal elementApp and fix act warning in ut ([#1756](https://github.com/logto-io/logto/issues/1756)) ([0270bf1](https://github.com/logto-io/logto/commit/0270bf1be3a51d9b9f8ed84a0327c58ed8a1bd4d))
+* **ui:** fix ui test ([e4629f2](https://github.com/logto-io/logto/commit/e4629f2a5fd26a1d8eaefd04042eaeb5563ec30c))
+
+
+
+## [1.0.0-beta.3](https://github.com/logto-io/logto/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-08-01)
+
+
+### Features
+
+* **connector:** azure active directory connector added ([#1662](https://github.com/logto-io/logto/issues/1662)) ([875a828](https://github.com/logto-io/logto/commit/875a82883161b79b11873bcfce2856e7b84502b4))
+* **console:** add Next.js integration guide in admin console ([7d3f947](https://github.com/logto-io/logto/commit/7d3f94738f495de98464d23b6fdf18214d59005e))
+* **console:** checked if sign in method is primary ([#1706](https://github.com/logto-io/logto/issues/1706)) ([405791f](https://github.com/logto-io/logto/commit/405791f9910ae9f11cf34d346b0b34fcba3a2aad))
+* **phrases:** tr language ([#1707](https://github.com/logto-io/logto/issues/1707)) ([411a8c2](https://github.com/logto-io/logto/commit/411a8c2fa2bfb16c4fef5f0a55c3c1dc5ead1124))
+
+
+### Bug Fixes
+
+* **console:** app error illustration height should not be shrunk ([301cc6c](https://github.com/logto-io/logto/commit/301cc6c51031d4042337583866c7c4814b730809))
+* **console:** should not display unsaved changes alert on connector config updated ([#1685](https://github.com/logto-io/logto/issues/1685)) ([61b65a7](https://github.com/logto-io/logto/commit/61b65a7288bcba0a139c917125b58ac3258ef3ad))
+* **test:** run integration test serially ([#1676](https://github.com/logto-io/logto/issues/1676)) ([8394f7b](https://github.com/logto-io/logto/commit/8394f7bb2ed5736bb2cd7857edd558602d236c6f))
+
+
+### Reverts
+
+* Revert "feat(console): checked if sign in method is primary" (#1712) ([2229dce](https://github.com/logto-io/logto/commit/2229dce36ea79bb04cf29c39bdb70b22f1430510)), closes [#1712](https://github.com/logto-io/logto/issues/1712) [#1706](https://github.com/logto-io/logto/issues/1706)
+
+
+
+## [1.0.0-beta.2](https://github.com/logto-io/logto/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-07-25)
+
+
+### Features
+
+* **core:** api GET /me ([#1650](https://github.com/logto-io/logto/issues/1650)) ([4bf6483](https://github.com/logto-io/logto/commit/4bf6483ff4674052d4b5d00d647c0c408b3ecc7f))
+* **core:** refresh token rotation reuse interval ([#1617](https://github.com/logto-io/logto/issues/1617)) ([bb245ad](https://github.com/logto-io/logto/commit/bb245adbb917dd066db2fe9cfbdbe102394e2c0e))
+* **core:** support integration test env config ([#1619](https://github.com/logto-io/logto/issues/1619)) ([708523e](https://github.com/logto-io/logto/commit/708523ed5287683cc23c6a93e01fe55dbd838e8c))
+
+
+### Bug Fixes
+
+* **console:** code editor content should be editable on firefox ([56ded3e](https://github.com/logto-io/logto/commit/56ded3e0a970bf5d05b675dc7306be22a7e6316c))
+* **console:** connector can be dragged upwards to reorder ([038bba4](https://github.com/logto-io/logto/commit/038bba45e198536a00af0e010abd437151c26497))
+* **console:** remove annoying horizontal scrollbar from code editor ([7dba908](https://github.com/logto-io/logto/commit/7dba9088492676e9ad257a280d5b615571f36167))
+* **console:** should parse to json before using zod safeParse ([ec674ec](https://github.com/logto-io/logto/commit/ec674ecd7745beb3df2b651bfa98d5e8d4a62dfd))
+* **core:** resolve some core no-restricted-syntax lint error ([#1606](https://github.com/logto-io/logto/issues/1606)) ([c56ddec](https://github.com/logto-io/logto/commit/c56ddec84ade4da1385d9821a1149375a70167dd))
+* **demo-app:** hide username if not exists ([#1644](https://github.com/logto-io/logto/issues/1644)) ([8b30f97](https://github.com/logto-io/logto/commit/8b30f974bfa4fa9c1aa43d2bcc22779a454905db))
+* **deps:** update dependency koa-router to v12 ([#1596](https://github.com/logto-io/logto/issues/1596)) ([6e96d73](https://github.com/logto-io/logto/commit/6e96d73a7c187c5dd25a7977654387ad2f33f3b2))
+* **test:** use demo app to test username-password flow in integration test ([#1635](https://github.com/logto-io/logto/issues/1635)) ([a258587](https://github.com/logto-io/logto/commit/a258587b4e804615b6a51e336a1af04478d91437))
+* **ui:** fix some firefox standout bug ([#1615](https://github.com/logto-io/logto/issues/1615)) ([4ce6bd8](https://github.com/logto-io/logto/commit/4ce6bd8cf5c5953d9f62878ab2ea6ede74f6ca48))
+* **ui:** protect window.location xss ([#1639](https://github.com/logto-io/logto/issues/1639)) ([34b465c](https://github.com/logto-io/logto/commit/34b465c7d83999e2215ef83555b64e38778b8b49))
+* **ui:** should clear prev passcode input when click on backspace ([#1660](https://github.com/logto-io/logto/issues/1660)) ([7dfbc30](https://github.com/logto-io/logto/commit/7dfbc300b09cc3dac2a06176bf2cbc9f338d857e))
+
+
+
 ## [1.0.0-beta.1](https://github.com/logto-io/logto/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-07-19)
 
 

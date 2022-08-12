@@ -1,5 +1,4 @@
-import { Language } from '@logto/phrases';
-import { Identities } from '@logto/schemas';
+import type { Identities, ConnectorDto } from '@logto/schemas';
 import { Optional } from '@silverhand/essentials';
 import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -20,12 +19,7 @@ type Props = {
   onDelete?: (connectorId: string) => void;
 };
 
-type DisplayConnector = {
-  target: string;
-  userId?: string;
-  logo: string;
-  name: Record<Language, string>;
-};
+type DisplayConnector = Pick<ConnectorDto, 'target' | 'logo' | 'name'> & { userId?: string };
 
 const UserConnectors = ({ userId, connectors, onDelete }: Props) => {
   const api = useApi();
@@ -64,6 +58,8 @@ const UserConnectors = ({ userId, connectors, onDelete }: Props) => {
           name: {
             'zh-CN': '未知连接器',
             en: 'Unknown Connector',
+            'tr-TR': 'Bilinmeyen connector.',
+            'ko-KR': '알수없는 연동',
           },
           target: key,
           userId: connectors[key]?.userId,

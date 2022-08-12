@@ -1,4 +1,4 @@
-import { User } from '@logto/schemas';
+import { arbitraryObjectGuard, User } from '@logto/schemas';
 import { Nullable } from '@silverhand/essentials';
 import { useEffect } from 'react';
 import { useForm, useController } from 'react-hook-form';
@@ -62,11 +62,19 @@ const UserSettings = ({ userData, userFormData, isDeleted, onUserUpdated }: Prop
       return;
     }
 
-    const { customData: inputtedCustomData, name, avatar, roleNames } = formData;
+    const { customData: inputCustomData, name, avatar, roleNames } = formData;
 
-    const customData = inputtedCustomData ? safeParseJson(inputtedCustomData) : {};
+    const parseResult = safeParseJson(inputCustomData);
 
-    if (!customData) {
+    if (!parseResult.success) {
+      toast.error(parseResult.error);
+
+      return;
+    }
+
+    const guardResult = arbitraryObjectGuard.safeParse(parseResult.data);
+
+    if (!guardResult.success) {
       toast.error(t('user_details.custom_data_invalid'));
 
       return;
@@ -76,7 +84,7 @@ const UserSettings = ({ userData, userFormData, isDeleted, onUserUpdated }: Prop
       name,
       avatar,
       roleNames,
-      customData,
+      customData: guardResult.data,
     };
 
     const updatedUser = await api

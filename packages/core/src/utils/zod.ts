@@ -12,7 +12,6 @@ import {
   ZodOptional,
   ZodString,
   ZodStringDef,
-  ZodType,
   ZodUnion,
   ZodUnknown,
 } from 'zod';
@@ -48,7 +47,7 @@ const zodStringToSwagger = (zodString: ZodString): OpenAPIV3.SchemaObject => {
 
   const formats = checks
     .map((zodStringCheck) => zodStringCheckToSwaggerFormat(zodStringCheck))
-    .filter((format) => format);
+    .filter(Boolean);
   const minLength = checks.find(
     (check): check is { kind: 'min'; value: number } => check.kind === 'min'
   )?.value;
@@ -129,7 +128,9 @@ export const zodTypeToSwagger = (config: unknown): OpenAPIV3.SchemaObject => {
 
   if (config instanceof ZodUnion) {
     return {
-      oneOf: (config.options as ZodType[]).map((option) => zodTypeToSwagger(option)),
+      // ZodUnion.options type is any
+      // eslint-disable-next-line no-restricted-syntax
+      oneOf: (config.options as unknown[]).map((option) => zodTypeToSwagger(option)),
     };
   }
 

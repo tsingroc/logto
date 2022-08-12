@@ -1,10 +1,12 @@
 import { NormalizeKeyPaths } from '@silverhand/essentials';
 
 import en from './locales/en';
+import koKR from './locales/ko-kr';
+import trTR from './locales/tr-tr';
 import zhCN from './locales/zh-cn';
 import { Resource, Language } from './types';
 
-export { Language } from './types';
+export { Language, languageOptions, languageEnumGuard } from './types';
 export type Translation = typeof en.translation;
 export type Errors = typeof en.errors;
 export type LogtoErrorCode = NormalizeKeyPaths<Errors>;
@@ -15,6 +17,8 @@ export type AdminConsoleKey = NormalizeKeyPaths<typeof en.translation.admin_cons
 const resource: Resource = {
   [Language.English]: en,
   [Language.Chinese]: zhCN,
+  [Language.Korean]: koKR,
+  [Language.Turkish]: trTR,
 };
 
 export default resource;

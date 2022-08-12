@@ -4,26 +4,15 @@
 
 <p align="center">
   <a href="https://logto.io" target="_blank" align="center" alt="Logto Logo">
-    <img src="./logo.png" width="100">
+    <img src="./logo.png" height="100">
   </a>
 </p>
 
-<p align="center">
-  <a href="https://github.com/logto-io/logto/releases">
-    <img src="https://img.shields.io/github/v/release/logto-io/logto?color=7958FF" alt="release" />
-  </a>
-  <a href="https://gitpod.io/#https://github.com/logto-io/logto">
-    <img src="https://img.shields.io/badge/gitpod-available-blue" alt="gitpod">
-  </a>
-  <a href="https://app.codecov.io/gh/logto-io/logto">
-    <img src="https://img.shields.io/codecov/c/github/logto-io/logto?label=core%20coverage" alt="core coverage" />
-  </a>
-  <a href="https://github.com/logto-io/logto/actions?query=branch%3Amaster">
-    <img src="https://img.shields.io/github/checks-status/logto-io/logto/master" alt="checks">
-  </a>
-</p>
-
-# Logto
+[![release](https://img.shields.io/github/v/release/logto-io/logto?color=7958FF)](https://github.com/logto-io/logto/releases)
+[![core coverage](https://img.shields.io/codecov/c/github/logto-io/logto?label=core%20coverage)](https://app.codecov.io/gh/logto-io/logto)
+[![checks](https://img.shields.io/github/checks-status/logto-io/logto/master)](https://github.com/logto-io/logto/actions?query=branch%3Amaster)
+[![gitpod](https://img.shields.io/badge/gitpod-available-f09439)](https://gitpod.io/#https://github.com/logto-io/logto)
+[![render](https://img.shields.io/badge/render-deploy-5364e9)](https://render.com/deploy?repo=https://github.com/logto-io/logto)
 
 Logto[^info] helps you build the sign-in, auth, and user identity within minutes.
 
@@ -70,10 +59,20 @@ Requires [Node.js](https://nodejs.org/) `^16.13.0` + [PostgreSQL](https://postgr
 node -e "$(printf "%s" "$(curl -fsSL https://raw.githubusercontent.com/logto-io/logto/HEAD/install.js)")"
 ```
 
+## Language support
+
+```ts
+const languages = ['English', '简体中文', 'Türkçe', '한국어'];
+```
+
 ## Bug report, feature request, feedback
 
 - Our team takes security seriously, especially when it relates to identity. If you find any existing or potential security issues, please do not hesitate to email 🔒 [security@logto.io](mailto:security@logto.io).
 - About other bug reports, feature requests, and feedback, you can directly 🙋 [open an issue](https://github.com/logto-io/logto/issues/new) on GitHub or 💬 [join our Discord server](https://discord.gg/UEPaF3j5e6) to have a live chat. We also have a 🗓️ [public roadmap](https://github.com/orgs/logto-io/projects/5) available.
+
+## Contributing
+
+We have a [contributing guideline](https://github.com/logto-io/logto/blob/master/.github/CONTRIBUTING.md) available. Feel free to contact us before coding.
 
 <br/>
 

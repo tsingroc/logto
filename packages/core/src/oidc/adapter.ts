@@ -54,19 +54,24 @@ const buildDemoAppUris = (
 
 export default function postgresAdapter(modelName: string): ReturnType<AdapterFactory> {
   if (modelName === 'Client') {
-    const reject = async () => Promise.reject(new Error('Not implemented'));
+    const reject = async () => {
+      throw new Error('Not implemented');
+    };
     const transpileClient = ({
       id: client_id,
+      secret: client_secret,
       name: client_name,
       type,
       oidcClientMetadata,
       customClientMetadata,
     }: CreateApplication): AllClientMetadata => ({
       client_id,
+      client_secret,
       client_name,
       application_type: getApplicationTypeString(type),
       grant_types: Object.values(GrantType),
-      token_endpoint_auth_method: 'none',
+      token_endpoint_auth_method:
+        type === ApplicationType.Traditional ? 'client_secret_basic' : 'none',
       ...snakecaseKeys(oidcClientMetadata),
       ...(client_id === demoAppApplicationId &&
         snakecaseKeys(buildDemoAppUris(oidcClientMetadata))),

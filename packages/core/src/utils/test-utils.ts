@@ -16,12 +16,12 @@ export const expectSqlAssert = (sql: string, expectSql: string) => {
     sql
       .split('\n')
       .map((row) => row.trim())
-      .filter((row) => row)
+      .filter(Boolean)
   ).toEqual(
     expectSql
       .split('\n')
       .map((row) => row.trim())
-      .filter((row) => row)
+      .filter(Boolean)
   );
 };
 
@@ -128,6 +128,8 @@ export function createRequester({
       if (provider) {
         route(anonymousRouter, provider);
       } else {
+        // For test use only
+        // eslint-disable-next-line no-restricted-syntax
         (route as RouteLauncher<AnonymousRouter>)(anonymousRouter);
       }
     }

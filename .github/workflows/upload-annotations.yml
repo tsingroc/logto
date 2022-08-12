@@ -12,13 +12,18 @@ concurrency:
 
 jobs:
   upload-annotations:
-    runs-on: ubuntu-latest
+    # avoid out of memory issue since macOS has bigger memory
+    # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+    runs-on: macos-latest
+
+    permissions:
+      checks: write
 
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup Node and pnpm
-        uses: silverhand-io/actions-node-pnpm-run-steps@v1.2.2
+        uses: silverhand-io/actions-node-pnpm-run-steps@v1.2.3
 
       - name: Prepack
         run: pnpm prepack

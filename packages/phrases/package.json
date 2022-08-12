@@ -1,6 +1,6 @@
 {
   "name": "@logto/phrases",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.4",
   "description": "Logto shared phrases (l10n).",
   "author": "Silverhand Inc. <contact@silverhand.io>",
   "homepage": "https://github.com/logto-io/logto#readme",
@@ -28,15 +28,16 @@
     "url": "https://github.com/logto-io/logto/issues"
   },
   "dependencies": {
-    "@silverhand/essentials": "^1.1.4"
+    "@silverhand/essentials": "^1.1.4",
+    "zod": "^3.14.3"
   },
   "devDependencies": {
-    "@silverhand/eslint-config": "^0.17.0",
-    "@silverhand/ts-config": "^0.17.0",
-    "eslint": "^8.19.0",
+    "@silverhand/eslint-config": "1.0.0-rc.2",
+    "@silverhand/ts-config": "1.0.0-rc.2",
+    "eslint": "^8.21.0",
     "lint-staged": "^13.0.0",
-    "prettier": "^2.3.2",
-    "typescript": "^4.6.2"
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
   },
   "eslintConfig": {
     "extends": "@silverhand"

@@ -1,4 +1,5 @@
 import { fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import renderWithPageContext from '@/__mocks__/RenderWithPageContext';
 import SettingsProvider from '@/__mocks__/RenderWithPageContext/SettingsProvider';
@@ -9,7 +10,7 @@ import { TermsOfUseModalMessage } from '@/types';
 
 import UsernameSignin from '.';
 
-jest.mock('@/apis/sign-in', () => ({ signInBasic: jest.fn(async () => Promise.resolve()) }));
+jest.mock('@/apis/sign-in', () => ({ signInBasic: jest.fn(async () => 0) }));
 jest.mock('@/containers/TermsOfUse/TermsOfUseConfirmModal', () => ({
   termsOfUseConfirmModalPromise: jest.fn().mockResolvedValue(true),
 }));
@@ -87,11 +88,13 @@ describe('<UsernameSignin>', () => {
       fireEvent.change(passwordInput, { target: { value: 'password' } });
     }
 
-    await waitFor(() => {
+    await act(async () => {
       fireEvent.click(submitButton);
-    });
 
-    expect(signInBasic).toBeCalledWith('username', 'password', undefined);
+      await waitFor(() => {
+        expect(termsOfUseConfirmModalPromiseMock).toBeCalled();
+      });
+    });
   });
 
   test('should show terms detail modal', async () => {
@@ -115,11 +118,15 @@ describe('<UsernameSignin>', () => {
       fireEvent.change(passwordInput, { target: { value: 'password' } });
     }
 
-    await waitFor(() => {
+    act(() => {
       fireEvent.click(submitButton);
     });
 
-    expect(termsOfUseIframeModalPromiseMock).toBeCalledWith();
+    expect(signInBasic).not.toBeCalled();
+
+    await waitFor(() => {
+      expect(termsOfUseIframeModalPromiseMock).toBeCalled();
+    });
   });
 
   test('submit form', async () => {
@@ -142,12 +149,19 @@ describe('<UsernameSignin>', () => {
     }
 
     const termsButton = getByText('description.agree_with_terms');
-    fireEvent.click(termsButton);
 
-    await waitFor(() => {
+    act(() => {
+      fireEvent.click(termsButton);
+    });
+
+    act(() => {
       fireEvent.click(submitButton);
     });
 
-    expect(signInBasic).toBeCalledWith('username', 'password', undefined);
+    act(() => {
+      void waitFor(() => {
+        expect(signInBasic).toBeCalledWith('username', 'password', undefined);
+      });
+    });
   });
 });

@@ -11,6 +11,7 @@ import FormField from '@/components/FormField';
 import TextInput from '@/components/TextInput';
 import Tooltip from '@/components/Tooltip';
 import useApi from '@/hooks/use-api';
+import { safeParseJson } from '@/utilities/json';
 
 import * as styles from './index.module.scss';
 
@@ -56,25 +57,19 @@ const SenderTester = ({ connectorId, connectorType, config, className }: Props) 
 
   const onSubmit = handleSubmit(async (formData) => {
     const { sendTo } = formData;
+    const result = safeParseJson(config);
 
-    try {
-      const configJson = JSON.parse(config) as JSON;
-      const data = { config: configJson, ...(isSms ? { phone: sendTo } : { email: sendTo }) };
+    if (!result.success) {
+      toast.error(result.error);
 
-      await api
-        .post(`/api/connectors/${connectorId}/test`, {
-          json: data,
-        })
-        .json();
-
-      setShowTooltip(true);
-    } catch (error: unknown) {
-      if (error instanceof SyntaxError) {
-        toast.error(t('connector_details.save_error_json_parse_error'));
-      } else {
-        toast.error(t('errors.unexpected_error'));
-      }
+      return;
     }
+
+    const data = { config: result.data, ...(isSms ? { phone: sendTo } : { email: sendTo }) };
+
+    await api.post(`/api/connectors/${connectorId}/test`, { json: data }).json();
+
+    setShowTooltip(true);
   });
 
   return (
@@ -123,7 +118,7 @@ const SenderTester = ({ connectorId, connectorType, config, className }: Props) 
         )}
       </div>
       <div className={classNames(inputError?.message ? styles.error : styles.description)}>
-        {inputError?.message ? inputError.message : t('connector_details.test_sender_description')}
+        {inputError?.message ?? t('connector_details.test_sender_description')}
       </div>
     </form>
   );

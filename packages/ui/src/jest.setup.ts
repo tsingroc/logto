@@ -22,7 +22,9 @@ global.crypto = new Crypto();
 
 const translation = (key: string) => key;
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
   useTranslation: () => ({
     t: translation,
     i18n: {
@@ -30,5 +32,3 @@ jest.mock('react-i18next', () => ({
     },
   }),
 }));
-
-export {};

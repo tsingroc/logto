@@ -123,18 +123,19 @@ export default function swaggerRoutes<T extends AnonymousRouter, R extends Route
 ) {
   router.get('/swagger.json', async (ctx, next) => {
     // Use `as` here since we'll check typing with integration tests
+    // eslint-disable-next-line no-restricted-syntax
     const additionalSwagger = load(
-      await readFile('static/yaml/additional-swagger.yaml', { encoding: 'utf-8' })
+      await readFile('static/yaml/additional-swagger.yaml', { encoding: 'utf8' })
     ) as OpenAPIV3.Document;
 
     const routes = allRouters.flatMap<RouteObject>((router) =>
       router.stack.flatMap<RouteObject>(({ path: routerPath, stack, methods }) =>
         methods
+          .map((method) => method.toLowerCase())
           // There is no need to show the HEAD method.
-          .filter((method) => method !== 'HEAD')
-          .map((method) => {
+          .filter((method): method is OpenAPIV3.HttpMethods => method !== 'head')
+          .map((httpMethod) => {
             const path = `/api${routerPath}`;
-            const httpMethod = method.toLowerCase() as OpenAPIV3.HttpMethods;
 
             const additionalPathItem = additionalSwagger.paths[path] ?? {};
             const additionalResponses = additionalPathItem[httpMethod]?.responses;

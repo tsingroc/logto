@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.4](https://github.com/logto-io/logto/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-08-11)
+
+
+### Features
+
+* **console:** add app secret to guide ([#1735](https://github.com/logto-io/logto/issues/1735)) ([380e258](https://github.com/logto-io/logto/commit/380e2581fa5fdd2a8d4c76f45cd114b1ddea9891))
+* **console:** show app secret ([#1723](https://github.com/logto-io/logto/issues/1723)) ([01dfeed](https://github.com/logto-io/logto/commit/01dfeed19b05219c1ab52790b3e98a029af02f90))
+
+
+### Bug Fixes
+
+* build and types ([8b51543](https://github.com/logto-io/logto/commit/8b515435cdb0644d0ca19e2c26ba3e744355bb0b))
+* **ui,console,demo-app:** update react render method ([#1750](https://github.com/logto-io/logto/issues/1750)) ([4b972f2](https://github.com/logto-io/logto/commit/4b972f2e23e2d4609d9955c4d1d42972f368f5b9))
+
+
+
+## [1.0.0-beta.3](https://github.com/logto-io/logto/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-08-01)
+
+
+### Features
+
+* **console:** add Next.js integration guide in admin console ([7d3f947](https://github.com/logto-io/logto/commit/7d3f94738f495de98464d23b6fdf18214d59005e))
+* **console:** checked if sign in method is primary ([#1706](https://github.com/logto-io/logto/issues/1706)) ([405791f](https://github.com/logto-io/logto/commit/405791f9910ae9f11cf34d346b0b34fcba3a2aad))
+* **phrases:** tr language ([#1707](https://github.com/logto-io/logto/issues/1707)) ([411a8c2](https://github.com/logto-io/logto/commit/411a8c2fa2bfb16c4fef5f0a55c3c1dc5ead1124))
+
+
+### Bug Fixes
+
+* **console:** app error illustration height should not be shrunk ([301cc6c](https://github.com/logto-io/logto/commit/301cc6c51031d4042337583866c7c4814b730809))
+* **console:** should not display unsaved changes alert on connector config updated ([#1685](https://github.com/logto-io/logto/issues/1685)) ([61b65a7](https://github.com/logto-io/logto/commit/61b65a7288bcba0a139c917125b58ac3258ef3ad))
+
+
+### Reverts
+
+* Revert "feat(console): checked if sign in method is primary" (#1712) ([2229dce](https://github.com/logto-io/logto/commit/2229dce36ea79bb04cf29c39bdb70b22f1430510)), closes [#1712](https://github.com/logto-io/logto/issues/1712) [#1706](https://github.com/logto-io/logto/issues/1706)
+
+
+
+## [1.0.0-beta.2](https://github.com/logto-io/logto/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-07-25)
+
+
+### Bug Fixes
+
+* **console:** code editor content should be editable on firefox ([56ded3e](https://github.com/logto-io/logto/commit/56ded3e0a970bf5d05b675dc7306be22a7e6316c))
+* **console:** connector can be dragged upwards to reorder ([038bba4](https://github.com/logto-io/logto/commit/038bba45e198536a00af0e010abd437151c26497))
+* **console:** remove annoying horizontal scrollbar from code editor ([7dba908](https://github.com/logto-io/logto/commit/7dba9088492676e9ad257a280d5b615571f36167))
+* **console:** should parse to json before using zod safeParse ([ec674ec](https://github.com/logto-io/logto/commit/ec674ecd7745beb3df2b651bfa98d5e8d4a62dfd))
+
+
+
 ## [1.0.0-beta.1](https://github.com/logto-io/logto/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-07-19)
 
 

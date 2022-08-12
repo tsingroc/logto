@@ -10,11 +10,11 @@ const { table, fields } = convertToIdentifiers(Logs);
 
 export const insertLog = buildInsertInto<CreateLog>(Logs);
 
-export interface LogCondition {
+export type LogCondition = {
   logType?: string;
   applicationId?: string;
   userId?: string;
-}
+};
 
 const buildLogConditionSql = (logCondition: LogCondition) =>
   conditionalSql(logCondition, ({ logType, applicationId, userId }) => {

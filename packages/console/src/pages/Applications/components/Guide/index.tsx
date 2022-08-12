@@ -26,6 +26,7 @@ const Guides: Record<string, LazyExoticComponent<(props: MDXProps) => JSX.Elemen
   vue: lazy(async () => import('@/assets/docs/tutorial/integrate-sdk/vue.mdx')),
   vanilla: lazy(async () => import('@/assets/docs/tutorial/integrate-sdk/vanilla.mdx')),
   express: lazy(async () => import('@/assets/docs/tutorial/integrate-sdk/express.mdx')),
+  next: lazy(async () => import('@/assets/docs/tutorial/integrate-sdk/next.mdx')),
   'ios_zh-cn': lazy(async () => import('@/assets/docs/tutorial/integrate-sdk/ios_zh-cn.mdx')),
   'android_zh-cn': lazy(
     async () => import('@/assets/docs/tutorial/integrate-sdk/android_zh-cn.mdx')
@@ -38,10 +39,11 @@ const Guides: Record<string, LazyExoticComponent<(props: MDXProps) => JSX.Elemen
   'express_zh-cn': lazy(
     async () => import('@/assets/docs/tutorial/integrate-sdk/express_zh-cn.mdx')
   ),
+  'next_zh-cn': lazy(async () => import('@/assets/docs/tutorial/integrate-sdk/next_zh-cn.mdx')),
 };
 
 const Guide = ({ app, isCompact, onClose }: Props) => {
-  const { id: appId, name: appName, type: appType, oidcClientMetadata } = app;
+  const { id: appId, secret: appSecret, name: appName, type: appType, oidcClientMetadata } = app;
   const sdks = applicationTypeAndSdkTypeMappings[appType];
   const [selectedSdk, setSelectedSdk] = useState<SupportedSdk>(sdks[0]);
   const [activeStepIndex, setActiveStepIndex] = useState(-1);
@@ -90,6 +92,7 @@ const Guide = ({ app, isCompact, onClose }: Props) => {
             {GuideComponent && (
               <GuideComponent
                 appId={appId}
+                appSecret={appSecret}
                 endpoint={window.location.origin}
                 redirectUris={oidcClientMetadata.redirectUris}
                 postLogoutRedirectUris={oidcClientMetadata.postLogoutRedirectUris}

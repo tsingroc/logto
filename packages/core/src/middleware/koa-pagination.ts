@@ -5,20 +5,20 @@ import { number } from 'zod';
 import RequestError from '@/errors/RequestError';
 import { buildLink } from '@/utils/pagination';
 
-export interface Pagination {
+export type Pagination = {
   offset: number;
   limit: number;
   totalCount?: number;
-}
+};
 
 export type WithPaginationContext<ContextT> = ContextT & {
   pagination: Pagination;
 };
 
-export interface PaginationConfig {
+export type PaginationConfig = {
   defaultPageSize?: number;
   maxPageSize?: number;
-}
+};
 
 export const isPaginationMiddleware = <Type extends IMiddleware>(
   function_: Type

@@ -1,7 +1,8 @@
+import { languageEnumGuard } from '@logto/phrases';
 import { ConnectorDto, ConnectorType } from '@logto/schemas';
 import { conditional } from '@silverhand/essentials';
 import i18next from 'i18next';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,7 @@ import Close from '@/icons/Close';
 import Step from '@/mdx-components/Step';
 import SenderTester from '@/pages/ConnectorDetails/components/SenderTester';
 import { GuideForm } from '@/types/guide';
+import { safeParseJson } from '@/utilities/json';
 
 import * as styles from './index.module.scss';
 
@@ -30,10 +32,10 @@ const Guide = ({ connector, onClose }: Props) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'admin_console' });
   const { id: connectorId, type: connectorType, name, configTemplate, readme } = connector;
 
-  const locale = i18next.language;
+  const localeRaw = i18next.language;
+  const result = languageEnumGuard.safeParse(localeRaw);
+  const connectorName = result.success ? name[result.data] : name.en;
 
-  const foundName = Object.entries(name).find(([lang]) => lang === locale);
-  const connectorName = foundName ? foundName[1] : name.en;
   const isSocialConnector =
     connectorType !== ConnectorType.SMS && connectorType !== ConnectorType.Email;
   const methods = useForm<GuideForm>({ reValidateMode: 'onBlur' });
@@ -49,31 +51,28 @@ const Guide = ({ connector, onClose }: Props) => {
       return;
     }
 
-    try {
-      const config = JSON.parse(connectorConfigJson) as JSON;
-      await api
-        .patch(`/api/connectors/${connectorId}`, {
-          json: { config },
-        })
-        .json<ConnectorDto>();
-      await api
-        .patch(`/api/connectors/${connectorId}/enabled`, {
-          json: { enabled: true },
-        })
-        .json<ConnectorDto>();
+    const result = safeParseJson(connectorConfigJson);
 
-      await updateSettings({
-        ...conditional(!isSocialConnector && { passwordlessConfigured: true }),
-        ...conditional(isSocialConnector && { socialSignInConfigured: true }),
-      });
+    if (!result.success) {
+      toast.error(result.error);
 
-      onClose();
-      toast.success(t('general.saved'));
-    } catch (error: unknown) {
-      if (error instanceof SyntaxError) {
-        toast.error(t('connector_details.save_error_json_parse_error'));
-      }
+      return;
     }
+
+    await api
+      .patch(`/api/connectors/${connectorId}`, { json: { config: result.data } })
+      .json<ConnectorDto>();
+    await api
+      .patch(`/api/connectors/${connectorId}/enabled`, { json: { enabled: true } })
+      .json<ConnectorDto>();
+
+    await updateSettings({
+      ...conditional(!isSocialConnector && { passwordlessConfigured: true }),
+      ...conditional(isSocialConnector && { socialSignInConfigured: true }),
+    });
+
+    onClose();
+    toast.success(t('general.saved'));
   });
 
   return (
@@ -92,41 +91,39 @@ const Guide = ({ connector, onClose }: Props) => {
       <div className={styles.content}>
         <Markdown className={styles.readme}>{readme}</Markdown>
         <div className={styles.setup}>
-          <FormProvider {...methods}>
-            <form onSubmit={onSubmit}>
-              <Step
-                title={t('connector_details.edit_config_label')}
-                index={0}
-                activeIndex={0}
-                buttonText="connectors.save_and_done"
-                buttonHtmlType="submit"
-                buttonType="primary"
-                isLoading={isSubmitting}
-              >
-                <Controller
-                  name="connectorConfigJson"
-                  control={control}
-                  defaultValue={configTemplate}
-                  render={({ field: { onChange, value } }) => (
-                    <CodeEditor
-                      className={styles.editor}
-                      language="json"
-                      value={value}
-                      onChange={onChange}
-                    />
-                  )}
-                />
-                {!isSocialConnector && (
-                  <SenderTester
-                    className={styles.tester}
-                    connectorId={connectorId}
-                    connectorType={connectorType}
-                    config={watch('connectorConfigJson')}
+          <Step
+            title={t('connector_details.edit_config_label')}
+            index={0}
+            activeIndex={0}
+            buttonText="connectors.save_and_done"
+            buttonType="primary"
+            isLoading={isSubmitting}
+            onButtonClick={onSubmit}
+          >
+            <form {...methods}>
+              <Controller
+                name="connectorConfigJson"
+                control={control}
+                defaultValue={configTemplate}
+                render={({ field: { onChange, value } }) => (
+                  <CodeEditor
+                    className={styles.editor}
+                    language="json"
+                    value={value}
+                    onChange={onChange}
                   />
                 )}
-              </Step>
+              />
             </form>
-          </FormProvider>
+            {!isSocialConnector && (
+              <SenderTester
+                className={styles.tester}
+                connectorId={connectorId}
+                connectorType={connectorType}
+                config={watch('connectorConfigJson')}
+              />
+            )}
+          </Step>
         </div>
       </div>
     </div>

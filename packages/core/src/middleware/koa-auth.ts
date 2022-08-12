@@ -40,17 +40,17 @@ type UserInfo = {
 };
 
 const getUserInfoFromRequest = async (request: Request): Promise<UserInfo> => {
-  const { isProduction, developmentUserId, oidc } = envSet.values;
-  const userId = developmentUserId || request.headers['development-user-id']?.toString();
+  const { isProduction, isIntegrationTest, developmentUserId, oidc } = envSet.values;
+  const userId = request.headers['development-user-id']?.toString() ?? developmentUserId;
 
-  if (!isProduction && userId) {
+  if ((!isProduction || isIntegrationTest) && userId) {
     return { sub: userId, roleNames: [UserRole.Admin] };
   }
 
-  const { publicKey, issuer } = oidc;
+  const { localJWKSet, issuer } = oidc;
   const {
     payload: { sub, role_names: roleNames },
-  } = await jwtVerify(extractBearerTokenFromHeaders(request.headers), publicKey, {
+  } = await jwtVerify(extractBearerTokenFromHeaders(request.headers), localJWKSet, {
     issuer,
     audience: managementResource.indicator,
   });

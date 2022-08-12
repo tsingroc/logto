@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import renderWithPageContext from '@/__mocks__/RenderWithPageContext';
@@ -9,10 +9,10 @@ import { sendSignInEmailPasscode } from '@/apis/sign-in';
 import EmailPasswordless from './EmailPasswordless';
 
 jest.mock('@/apis/sign-in', () => ({
-  sendSignInEmailPasscode: jest.fn(async () => Promise.resolve()),
+  sendSignInEmailPasscode: jest.fn(async () => 0),
 }));
 jest.mock('@/apis/register', () => ({
-  sendRegisterEmailPasscode: jest.fn(async () => Promise.resolve()),
+  sendRegisterEmailPasscode: jest.fn(async () => 0),
 }));
 
 describe('<EmailPasswordless/>', () => {
@@ -78,11 +78,13 @@ describe('<EmailPasswordless/>', () => {
 
     const submitButton = getByText('action.continue');
 
-    await waitFor(() => {
+    act(() => {
       fireEvent.click(submitButton);
     });
 
-    expect(sendSignInEmailPasscode).toBeCalledWith('foo@logto.io');
+    await waitFor(() => {
+      expect(sendSignInEmailPasscode).toBeCalledWith('foo@logto.io');
+    });
   });
 
   test('should call register method properly', async () => {
@@ -103,10 +105,12 @@ describe('<EmailPasswordless/>', () => {
 
     const submitButton = getByText('action.continue');
 
-    await waitFor(() => {
+    act(() => {
       fireEvent.click(submitButton);
     });
 
-    expect(sendRegisterEmailPasscode).toBeCalledWith('foo@logto.io');
+    await waitFor(() => {
+      expect(sendRegisterEmailPasscode).toBeCalledWith('foo@logto.io');
+    });
   });
 });
