@@ -1,6 +1,6 @@
 {
   "name": "@logto/phrases-ui",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "i18n phrases for main-flow",
   "author": "Silverhand Inc. <contact@silverhand.io>",
   "homepage": "https://github.com/logto-io/logto#readme",
@@ -28,7 +28,7 @@
     "url": "https://github.com/logto-io/logto/issues"
   },
   "dependencies": {
-    "@silverhand/essentials": "^1.1.4"
+    "@silverhand/essentials": "^1.2.0"
   },
   "devDependencies": {
     "@silverhand/eslint-config": "1.0.0-rc.2",

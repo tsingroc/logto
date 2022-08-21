@@ -1,7 +1,7 @@
 import crypto, { generateKeyPairSync } from 'crypto';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 
-import { getEnv } from '@silverhand/essentials';
+import { getEnv, getEnvAsStringArray } from '@silverhand/essentials';
 import inquirer from 'inquirer';
 import { createLocalJWKSet } from 'jose';
 import { nanoid } from 'nanoid';
@@ -10,9 +10,8 @@ import { exportJWK } from '@/utils/jwks';
 
 import { appendDotEnv } from './dot-env';
 import { allYes, noInquiry } from './parameters';
-import { getEnvAsStringArray } from './utils';
 
-const defaultLogtoOidcPrivateKey = './oidc-private-key.pem';
+const defaultLogtoOidcPrivateKeyPath = './oidc-private-key.pem';
 
 const listFormatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 
@@ -36,10 +35,15 @@ export const readPrivateKeys = async (): Promise<string[]> => {
 
   const privateKeyPaths = getEnvAsStringArray('OIDC_PRIVATE_KEY_PATHS');
 
-  // If no private key path is found, ask the user to generate a new one.
+  /**
+   * If neither `OIDC_PRIVATE_KEYS` nor `OIDC_PRIVATE_KEY_PATHS` is provided:
+   *
+   * 1. Try to read the private key from `defaultLogtoOidcPrivateKeyPath`
+   * 2. If the `defaultLogtoOidcPrivateKeyPath` doesn't exist, then ask user to generate a new key.
+   */
   if (privateKeyPaths.length === 0) {
     try {
-      return [readFileSync(defaultLogtoOidcPrivateKey, 'utf8')];
+      return [readFileSync(defaultLogtoOidcPrivateKeyPath, 'utf8')];
     } catch (error: unknown) {
       if (noInquiry) {
         throw error;
@@ -49,7 +53,7 @@ export const readPrivateKeys = async (): Promise<string[]> => {
         const answer = await inquirer.prompt({
           type: 'confirm',
           name: 'confirm',
-          message: `No private key found in env \`OIDC_PRIVATE_KEYS\` nor \`${defaultLogtoOidcPrivateKey}\`, would you like to generate a new one?`,
+          message: `No private key found in env \`OIDC_PRIVATE_KEYS\` nor \`${defaultLogtoOidcPrivateKeyPath}\`, would you like to generate a new one?`,
         });
 
         if (!answer.confirm) {
@@ -68,18 +72,18 @@ export const readPrivateKeys = async (): Promise<string[]> => {
           format: 'pem',
         },
       });
-      writeFileSync(defaultLogtoOidcPrivateKey, privateKey);
+      writeFileSync(defaultLogtoOidcPrivateKeyPath, privateKey);
 
       return [privateKey];
     }
   }
 
-  const notExistPrivateKeys = privateKeyPaths.filter((path): boolean => !existsSync(path));
+  const nonExistentPrivateKeys = privateKeyPaths.filter((path): boolean => !existsSync(path));
 
-  if (notExistPrivateKeys.length > 0) {
+  if (nonExistentPrivateKeys.length > 0) {
     throw new Error(
       `Private keys ${listFormatter.format(
-        notExistPrivateKeys
+        nonExistentPrivateKeys
       )} configured in env \`OIDC_PRIVATE_KEY_PATHS\` not found.`
     );
   }

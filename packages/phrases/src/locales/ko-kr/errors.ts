@@ -4,6 +4,8 @@ const errors = {
     authorization_token_type_not_supported: '해당 인증 방법을 지원하지 않아요.',
     unauthorized: '인증되지 않았어요. 로그인 정보와 범위를 확인해주세요.',
     forbidden: '접근이 금지되었어요. 로그인 권한와 직책을 확인해주세요.',
+    expected_role_not_found:
+      'Expected role not found. Please check your user roles and permissions.',
     jwt_sub_missing: 'JWT에서 `sub`를 찾을 수 없어요.',
   },
   guard: {
@@ -38,6 +40,7 @@ const errors = {
     identity_not_exists: '소셜 계정이 아직 등록되지 않았어요.',
     identity_exists: '소셜 계정이 이미 등록되있어요.',
     invalid_role_names: '직책 명({{roleNames}})이 유효하지 않아요.',
+    cannot_delete_self: 'You cannot delete yourself.',
   },
   password: {
     unsupported_encryption_method: '{{name}} 암호화 방법을 지원하지 않아요.',

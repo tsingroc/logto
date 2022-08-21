@@ -4,6 +4,8 @@ const errors = {
     authorization_token_type_not_supported: 'Authorization type is not supported.',
     unauthorized: 'Unauthorized. Please check credentials and its scope.',
     forbidden: 'Forbidden. Please check your user roles and permissions.',
+    expected_role_not_found:
+      'Expected role not found. Please check your user roles and permissions.',
     jwt_sub_missing: 'Missing `sub` in JWT.',
   },
   guard: {
@@ -39,6 +41,7 @@ const errors = {
     identity_not_exists: 'The social account has not been registered yet.',
     identity_exists: 'The social account has been registered.',
     invalid_role_names: 'role names ({{roleNames}}) are not valid',
+    cannot_delete_self: 'You cannot delete yourself.',
   },
   password: {
     unsupported_encryption_method: 'The encryption method {{name}} is not supported.',

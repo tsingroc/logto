@@ -4,6 +4,8 @@ const errors = {
     authorization_token_type_not_supported: 'Yetkilendirme tipi desteklenmiyor.',
     unauthorized: 'Yetki yok. Lütfen kimlik bilgilerini ve kapsamını kontrol edin.',
     forbidden: 'Yasak. Lütfen kullanıcı rollerinizi ve izinlerinizi kontrol edin.',
+    expected_role_not_found:
+      'Expected role not found. Please check your user roles and permissions.',
     jwt_sub_missing: 'JWTde `sub` eksik.',
   },
   guard: {
@@ -39,6 +41,7 @@ const errors = {
     identity_not_exists: 'Sosyal platform hesabı henüz kaydedilmedi.',
     identity_exists: 'Sosyal platform hesabı kaydedildi.',
     invalid_role_names: '({{roleNames}}) rol adları geçerli değil.',
+    cannot_delete_self: 'You cannot delete yourself.',
   },
   password: {
     unsupported_encryption_method: '{{name}} şifreleme metodu desteklenmiyor.',
